@@ -8,10 +8,17 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("----------Level")]
     [SerializeField]
+    [Range(25, 60)]
     private int _width;
 
     [SerializeField]
-    private int _height, _numberOfVerticalTeleporters, _numberOfHorizontalTeleporters, _chanceToHaveWall, _pacDotsRate;
+    [Range(25, 60)]
+    private int _height;
+
+    [SerializeField]
+    private int _numberOfVerticalTeleporters, _numberOfHorizontalTeleporters, _chanceToHaveWall, _pacDotsRate, _superPacDotsRate, _numberOfGhosts;
+
+    private int _ghostCount;
 
     private List<Vector2Int> _randWallsVectors;
 
@@ -24,6 +31,9 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField]
     private Transform _wallsParent;
+
+    [SerializeField]
+    private GameManager _gm;
 
     [Header("----------Prefabs")]
     [SerializeField]
@@ -57,8 +67,9 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         CreateLevel();
-        CreatePacman();
+        CreateGhosts();
         CreatePacDots();
+        CreatePacman();
     }
 
     private void Update()
@@ -143,7 +154,9 @@ public class LevelGenerator : MonoBehaviour
                         if (j != 0 && j != _height - 1 && i != 0 && i != _width - 1)
                         {
                             GameObject go = Instantiate(_pacDot, new Vector3(i, j * -1, 0), Quaternion.identity);
+                            _randWallsVectors.Add(new Vector2Int(i, j));
                             go.transform.parent = _wallsParent;
+                            _gm._pacDotsNumber++;
                         }
                         mustCreate = false;
                     }
@@ -154,6 +167,29 @@ public class LevelGenerator : MonoBehaviour
                     if (count >= _pacDotsRate)
                     {
                         count = 0;
+
+                        if (Random.Range(0, _superPacDotsRate) == 0)
+                        {
+                            for (int k = 0; k < _randWallsVectors.Count; k++)
+                            {
+                                if (i == _randWallsVectors[k].x && j == _randWallsVectors[k].y)
+                                {
+                                    isOnAWall = true;
+                                }
+                            }
+                            if (!isOnAWall)
+                            {
+                                if (j != 0 && j != _height - 1 && i != 0 && i != _width - 1)
+                                {
+                                    GameObject go = Instantiate(_superPacDot, new Vector3(i, j * -1, 0), Quaternion.identity);
+                                    _randWallsVectors.Add(new Vector2Int(i, j));
+                                    go.transform.parent = _wallsParent;
+                                    _gm._pacDotsNumber++;
+                                }
+                                mustCreate = false;
+                            }
+                        }
+
                         mustCreate = true;
                     }
                 }
@@ -166,6 +202,30 @@ public class LevelGenerator : MonoBehaviour
     {
         GameObject _pacmanObject = Instantiate(_pacman, new Vector3(10, -19, 0), Quaternion.identity);
         _camera.transform.parent = _pacmanObject.transform;
+    }
+
+    private void CreateGhosts()
+    {
+        bool isOnAWall = false;
+        if (_ghostCount <= _numberOfGhosts)
+        {
+            int x = Random.Range(1, _width - 1);
+            int y = Random.Range(1, _height - 1);
+
+            for (int i = 0; i < _randWallsVectors.Count; i++)
+            {
+                if (x == _randWallsVectors[i].x && y == _randWallsVectors[i].y)
+                {
+                    isOnAWall = true;
+                }
+            }
+            if (!isOnAWall)
+            {
+                Instantiate(_fantome, new Vector3(x, y * -1, 0), Quaternion.identity);
+                _ghostCount++;
+            }
+            CreateGhosts();
+        }
     }
 
     #endregion Functions

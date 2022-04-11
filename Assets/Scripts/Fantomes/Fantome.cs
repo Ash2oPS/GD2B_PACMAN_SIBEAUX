@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
-public class Fantome : MonoBehaviour
+public class Fantome : Character
 {
     #region PrivateVariables
 
     [Header("----------Getters")]
     [SerializeField]
     private SpriteRenderer _sr;
+
+    [SerializeField]
+    private Light2D _light;
 
     [Header("----------Stats")]
     [SerializeField]
@@ -44,6 +48,7 @@ public class Fantome : MonoBehaviour
 
         _sr.sprite = _currentSprite;
         _sr.color = _currentColor;
+        _light.color = _currentColor;
     }
 
     private void Update()
@@ -81,11 +86,13 @@ public class Fantome : MonoBehaviour
         {
             _sr.sprite = _scaredSprite;
             _sr.color = _scaredColor;
+            _light.color = _scaredColor;
         }
         else
         {
             _sr.sprite = _currentSprite;
             _sr.color = _currentColor;
+            _light.color = _currentColor;
         }
     }
 

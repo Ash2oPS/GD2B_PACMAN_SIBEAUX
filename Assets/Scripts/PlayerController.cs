@@ -2,59 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
-    #region PrivateVariables
-
-    [SerializeField]
-    private float _moveSpeed;
-
-    [SerializeField]
-    private Rigidbody2D _rb;
-
-    private Vector2Int _direction, _nextMove;
-
-    #endregion PrivateVariables
-
-    #region GettersAndSetters
-
-    public float MoveSpeed { get => _moveSpeed; }
-
-    #endregion GettersAndSetters
-
-    #region InheritedFunctions
+    private GameManager _gm;
 
     private void Start()
     {
+        _gm = FindObjectOfType<GameManager>();
         _direction = Vector2Int.right;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        _rb.velocity = new Vector3(_direction.x, _direction.y, 0) * _moveSpeed * Time.deltaTime;
-    }
-
-    #endregion InheritedFunctions
-
-    #region Functions
-
-    public void SetNextMove(Vector2Int pouet)
-    {
-        _nextMove = pouet;
-    }
-
-    private void ChangeDirection()
-    {
-        if (_nextMove != Vector2Int.zero)
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
         {
-            _direction = _nextMove;
-            _nextMove = Vector2Int.zero;
+            int x = 0;
+            int y = 0;
+
+            if (Input.GetAxis("Horizontal") > 0.1f)
+            {
+                x = 1;
+            }
+            else if (Input.GetAxis("Horizontal") < -0.1f)
+            {
+                x = -1;
+            }
+            if (Input.GetAxis("Vertical") > 0.1f)
+            {
+                y = 1;
+            }
+            else if (Input.GetAxis("Vertical") < -0.1f)
+            {
+                y = -1;
+            }
+
+            SetNextMove(new Vector2Int(x, y));
+            ChangeDirection();
         }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        PacDot pd = null;
+        SuperPacDot spd = null;
+        collision.TryGetComponent<PacDot>(out pd);
+        if (pd != null)
+        {
+            _gm._pacDotsNumber--;
+            pd.gameObject.SetActive(false);
+        }
+        collision.TryGetComponent<SuperPacDot>(out spd);
+        if (spd != null)
+        {
+            _gm.ScareGhost();
+        }
     }
 
-    #endregion Functions
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        /*Fantome f = null;
+        collision.TryGetComponent<Fantome>(out f);
+        if (f != null && f.IsScared)
+        {
+            f.gameObject.SetActive(false);
+        }*/
+    }
 }

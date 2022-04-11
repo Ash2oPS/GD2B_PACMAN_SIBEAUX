@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class CameraRotation : MonoBehaviour
 {
     #region PrivateVariables
 
-    public int _pacDotsNumber;
+    private float _baseX;
 
     #endregion PrivateVariables
 
@@ -20,23 +20,20 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _baseX = transform.position.x;
     }
 
     private void Update()
     {
+        float rot = (transform.position.x - _baseX) / -3;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, rot));
     }
 
     #endregion InheritedFunctions
 
     #region Functions
 
-    public void ScareGhost()
-    {
-        for (int i = 0; i < FindObjectsOfType<Fantome>().Length; i++)
-        {
-            FindObjectsOfType<Fantome>()[i].SetScared(true);
-        }
-    }
+    // NEW FUNCTIONS
 
     #endregion Functions
 }

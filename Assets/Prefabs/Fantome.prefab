@@ -92,9 +92,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5583899870416335382}
-  - component: {fileID: 5583899870416335381}
   - component: {fileID: 2624597665304925457}
   - component: {fileID: 7693834824543390385}
+  - component: {fileID: -6824819339131272983}
+  - component: {fileID: 2824791347842801512}
   m_Layer: 0
   m_Name: Fantome
   m_TagString: Untagged
@@ -117,32 +118,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5583899870416335381
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5583899870416335376}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &2624597665304925457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d196526834dffb246a389de8bf13ab94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 0
+  _rb: {fileID: -6824819339131272983}
   _sr: {fileID: 5583899869669613886}
+  _light: {fileID: 7693834824543390385}
   _isScared: 0
   _possibleSprites:
   - {fileID: 21300000, guid: a2acf7d5f1035da478b1bf644021b3ad, type: 3}
@@ -164,7 +142,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 81aa3e699d0011047a5520981a909c54, type: 3}
   - {fileID: 21300000, guid: c1fc895b1e3383345b0916ca7cf6d185, type: 3}
   _scaredSprite: {fileID: 21300000, guid: e6d17f2c6bdf00f4b8235c74d00a7f61, type: 3}
-  _scaredColor: {r: 0.085039176, g: 0.14620833, b: 0.46226418, a: 0}
+  _scaredColor: {r: 0.085039176, g: 0.14620833, b: 0.46226418, a: 1}
 --- !u!114 &7693834824543390385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5583899870416335376}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
@@ -229,7 +207,7 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 359.53
+  m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 7.4668655
@@ -243,3 +221,40 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!50 &-6824819339131272983
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583899870416335376}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!58 &2824791347842801512
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583899870416335376}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3

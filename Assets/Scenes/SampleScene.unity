@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b911ec438dd581b4ea84f9de06567165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pacDotsNumber: 0
 --- !u!4 &507879642
 Transform:
   m_ObjectHideFlags: 0
@@ -179,15 +180,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03c71ffb1c4f2141ab9ccc6ae41cfb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 30
-  _height: 40
+  _width: 25
+  _height: 25
   _numberOfVerticalTeleporters: 0
   _numberOfHorizontalTeleporters: 0
   _chanceToHaveWall: 4
-  _pacDotsRate: 4
+  _pacDotsRate: 2
+  _superPacDotsRate: 20
+  _numberOfGhosts: 4
   _camera: {fileID: 519420028}
   _spawner: {fileID: 1406191962}
   _wallsParent: {fileID: 1717002242}
+  _gm: {fileID: 507879641}
   _pacman: {fileID: 5389138781057290166, guid: 318234c15f40eee4b9b928b616f563d7, type: 3}
   _wall: {fileID: 8312980602691553480, guid: c49c99d21007d084d999e9fbcb1094e0, type: 3}
   _ground: {fileID: 713873267348297314, guid: 2e51ded4855545c4cb47200a79409fdc, type: 3}
@@ -206,6 +210,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: -----MAINCAMERA-----
   m_TagString: MainCamera
@@ -263,7 +268,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.64705884, g: 0.7137255, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -311,6 +316,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.5}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33941c5c075a9948a6bf9afba4502a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &579669601
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,8 +375,8 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.75, b: 0.80454946, a: 1}
+  m_Intensity: 1.3
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: bbf2b315
@@ -562,18 +579,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3542202384370387169, guid: 06fe0579b972f2f4491dd30b01abb64d, type: 3}
   m_PrefabInstance: {fileID: 1406191961}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1406191963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406191962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9fbff5763a88504ab01c80a827e72ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1717002241
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,8 +656,8 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.75, b: 0.7891798, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 0, g: 0.6853483, b: 1, a: 1}
+  m_Intensity: 0.2
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000d3e0170133935a7ded170bf0
