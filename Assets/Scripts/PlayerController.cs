@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _moveSpeed;
 
-    private Vector2Int _nextMove;
+    private Vector2Int _direction, _nextMove;
 
     #endregion PrivateVariables
 
@@ -23,10 +23,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _direction = Vector2Int.right;
     }
 
     private void Update()
     {
+        transform.Translate((new Vector3(_direction.x, _direction.y, 0)) * _moveSpeed * Time.deltaTime);
     }
 
     #endregion InheritedFunctions
@@ -42,8 +44,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_nextMove != Vector2Int.zero)
         {
+            _direction = _nextMove;
             _nextMove = Vector2Int.zero;
         }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
     }
 
     #endregion Functions
