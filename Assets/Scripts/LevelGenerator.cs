@@ -6,7 +6,20 @@ public class LevelGenerator : MonoBehaviour
 {
     #region PrivateVariables
 
-    //private Type _maVariable;
+    [SerializeField]
+    private GameObject _wall;
+
+    [SerializeField]
+    private GameObject _ground;
+
+    [SerializeField]
+    private GameObject _pacDot;
+
+    [SerializeField]
+    private GameObject _superPacDot;
+
+    [SerializeField]
+    private GameObject _fantome;
 
     #endregion PrivateVariables
 
