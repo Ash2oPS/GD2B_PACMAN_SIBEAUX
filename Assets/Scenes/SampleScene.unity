@@ -185,9 +185,9 @@ MonoBehaviour:
   _numberOfVerticalTeleporters: 0
   _numberOfHorizontalTeleporters: 0
   _chanceToHaveWall: 4
-  _pacDotsRate: 2
-  _superPacDotsRate: 20
-  _numberOfGhosts: 4
+  _pacDotsRate: 1
+  _superPacDotsRate: 5
+  _numberOfGhosts: 10
   _camera: {fileID: 519420028}
   _spawner: {fileID: 1406191962}
   _wallsParent: {fileID: 1717002242}

@@ -51,10 +51,6 @@ public class Fantome : Character
         _light.color = _currentColor;
     }
 
-    private void Update()
-    {
-    }
-
     #endregion InheritedFunctions
 
     #region Functions
@@ -84,9 +80,11 @@ public class Fantome : Character
         _isScared = value;
         if (value)
         {
+            StopAllCoroutines();
             _sr.sprite = _scaredSprite;
             _sr.color = _scaredColor;
             _light.color = _scaredColor;
+            StartCoroutine(Scared());
         }
         else
         {
@@ -94,6 +92,52 @@ public class Fantome : Character
             _sr.color = _currentColor;
             _light.color = _currentColor;
         }
+    }
+
+    private IEnumerator Scared()
+    {
+        yield return new WaitForSeconds(4);
+        _sr.sprite = _currentSprite;
+        _sr.color = _currentColor;
+        _light.color = _currentColor;
+        yield return new WaitForSeconds(0.5f);
+        _sr.sprite = _scaredSprite;
+        _sr.color = _scaredColor;
+        _light.color = _scaredColor;
+        yield return new WaitForSeconds(0.5f);
+        _sr.sprite = _currentSprite;
+        _sr.color = _currentColor;
+        _light.color = _currentColor;
+        yield return new WaitForSeconds(0.5f);
+        _sr.sprite = _scaredSprite;
+        _sr.color = _scaredColor;
+        _light.color = _scaredColor;
+        yield return new WaitForSeconds(0.5f);
+        _sr.sprite = _currentSprite;
+        _sr.color = _currentColor;
+        _light.color = _currentColor;
+        yield return new WaitForSeconds(0.5f);
+        _sr.sprite = _scaredSprite;
+        _sr.color = _scaredColor;
+        _light.color = _scaredColor;
+        yield return new WaitForSeconds(0.25f);
+        _sr.sprite = _currentSprite;
+        _sr.color = _currentColor;
+        _light.color = _currentColor;
+        yield return new WaitForSeconds(0.25f);
+        _sr.sprite = _scaredSprite;
+        _sr.color = _scaredColor;
+        _light.color = _scaredColor;
+        yield return new WaitForSeconds(0.25f);
+        _sr.sprite = _currentSprite;
+        _sr.color = _currentColor;
+        _light.color = _currentColor;
+        yield return new WaitForSeconds(0.25f);
+        _sr.sprite = _scaredSprite;
+        _sr.color = _scaredColor;
+        _light.color = _scaredColor;
+        yield return new WaitForSeconds(0.25f);
+        SetScared(false);
     }
 
     #endregion Functions
